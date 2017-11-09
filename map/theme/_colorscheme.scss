@@ -1,0 +1,18 @@
+
+@for $i from 0 through 200 {
+  .mb-#{$i} {
+    margin-bottom: $i + px $imp;
+  }
+
+  .mt-#{$i} {
+    margin-top: $i + px $imp;
+  }
+
+  .pb-#{$i} {
+    padding-bottom: $i + px $imp;
+  }
+
+  .pt-#{$i} {
+    padding-top: $i + px $imp;
+  }
+}

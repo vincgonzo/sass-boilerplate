@@ -1,0 +1,9 @@
+
+@font-face {
+  font-family: 'Name';
+  src: url('../url/Name.ttf');
+  src: url('../url/Name.ttf') format('embedded-opentype'),
+  url('../url/Name.woff') format('woff'),
+  url('../url/Name.eof') format('truetype'),
+  url('../url/Name.svg') format('svg');
+}

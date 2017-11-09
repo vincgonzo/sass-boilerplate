@@ -1,0 +1,38 @@
+.text-right {
+  text-align: right $imp;
+}
+
+.text-left {
+  text-align: left $imp;
+}
+
+.text-center {
+  text-align: center $imp;
+}
+
+.clear {
+  clear: both;
+}
+
+.upper {
+  text-transform: uppercase;
+}
+
+
+.main-content {
+  max-width: 90%;
+  @include alignCenter();
+}
+
+%centered-container {
+  @include alignCenter();
+}
+%margin-reset {
+  margin: 0;
+}
+%padding-reset {
+  padding: 0;
+}
+%border-result-row {
+  border-right: 1px solid $grey-d8;
+}

@@ -1,0 +1,167 @@
+// -----------------------------------------------------------------------------
+// This file contains all application-wide Sass mixins.
+// -----------------------------------------------------------------------------
+
+/// Event wrapper
+/// @author Harry Roberts
+/// @param {Bool} $self [false] - Whether or not to include current selector
+/// @link https://twitter.com/csswizardry/status/478938530342006784 Original tweet from Harry Roberts
+@mixin on-event($self: false) {
+  @if $self {
+    &,
+    &:hover,
+    &:active,
+    &:focus {
+      @content;
+    }
+  } @else {
+    &:hover,
+    &:active,
+    &:focus {
+      @content;
+    }
+  }
+}
+
+/// Make a context based selector a little more friendly
+/// @author Hugo Giraudel
+/// @param {String} $context
+@mixin when-inside($context) {
+  #{$context} & {
+    @content;
+  }
+}
+
+/// Responsive manager
+/// @param {String} $breakpoint - Breakpoint
+/// @requires $breakpoints
+/// @link http://sass-guidelin.es/#breakpoint-manager Sass Guidelines - Breakpoint Manager
+@mixin respond-to($breakpoint) {
+  $query: map-get($breakpoints, $breakpoint);
+
+  @if not $query {
+    @error 'No value found for `#{$breakpoint}`. Please make sure it is defined in `$breakpoints` map.';
+  }
+
+  @media #{if(type-of($query) == 'string', unquote($query), inspect($query))} {
+    @content;
+  }
+}
+
+/// ALIGN CENTER ELEMENTS
+
+@mixin alignCenter() {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@mixin inputForm() {
+  min-height: 35px;
+  max-width: 100%;
+  border-radius: 4px;
+  background-color: $white;
+  border: 1px solid $grey-d8;
+}
+
+@mixin mediumGrey() {
+  font-size: 17px;
+  color: $grey-9;
+}
+
+@mixin buttonForm() {
+  @include alignCenter();
+  background: #3D8EE8;
+  border-radius: 4px;
+  border: none;
+  height: 31px;
+  font-family: $sansHeadLight;
+  font-size: 12px;
+  color: $white;
+  line-height: 16px;
+  text-align: center;
+  padding: 5px;
+}
+
+@mixin emphasis($typo, $align, $margin-Bottom) {
+  font-family: $typo;
+  font-size: 15px;
+  margin-bottom: $margin-Bottom;
+  line-height: 22px;
+  text-align: $align;
+}
+
+@mixin alignContainer() {
+  position: relative;
+  transform-style: preserve-3d;
+}
+
+@mixin font($typo, $size, $line-height:$size, $weight:300, $color:inherit) {
+  font-family: $typo;
+  font-size: $size + px;
+  color: $color;
+  line-height: $line-height + px;
+  font-weight: $weight;
+}
+
+@mixin allAlignObject() {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@mixin flex-direction($direction) {
+  display: flex;
+  flex-direction: $direction;
+}
+
+@mixin alignVerticalObject() {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+@mixin fontSize($sizeValue) {
+  font-size: $sizeValue * 1px;
+}
+
+@mixin fontSizePlus10($sizeValue) {
+  font-size: ($sizeValue + 10) + px;
+}
+
+@mixin prefix($property, $value, $prefixes: ()) {
+  @each $prefix in $prefixes {
+    #{'-' + $prefix + '-' + $property}: $value;
+  }
+
+  // Output standard non-prefixed declaration
+  #{$property}: $value;
+}
+
+@mixin paddings($values: ()) {
+  @each $value in $values {
+    @include makePaddings(nth($value, 1), nth($value, 2));
+  }
+}
+
+@mixin makePaddings($val,$col) {
+  padding-#{$val}: #{$col}px;
+}
+
+/* -----   Media-Querries */
+@mixin mediaQuerries($media, $value-max, $value-min: false) {
+  @if $media == max {
+    @media only screen and (max-width: $value-max+px) {
+      @content;
+    }
+  } @else if $media == between {
+    @media only screen and (min-width: $value-min+px) and (max-width: $value-max+px) {
+      @content;
+    }
+  } @else if $media == min {
+    @media only screen and (min-width: $value-max+px) {
+      @content;
+    }
+  }
+}
