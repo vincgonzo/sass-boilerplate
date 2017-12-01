@@ -80,6 +80,23 @@
   }
 }
 
+/**
+ *  Erase margin for X-Y directions
+ */
+@mixin noMargin($directions: ()){
+  @each $direction in $directions {
+    margin-#{$direction}: 0 $imp;
+  }
+}
+/**
+ *  Erase padding for X-Y directions
+ */
+@mixin noPadding($directions: ()){
+  @each $direction in $directions {
+    padding-#{$direction}: 0 $imp;
+  }
+}
+
 @mixin alignContainer() {
   position: relative;
   transform-style: preserve-3d;
@@ -91,6 +108,19 @@
   color: $color;
   line-height: $line-height + px;
   font-weight: $weight;
+}
+
+@mixin alignXObject() {
+  position: absolute;
+  left: 50%;
+  right: 50%;
+  transform: translateX(-50%);
+}
+
+@mixin alignYObject() {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
 }
 
 @mixin allAlignObject() {
