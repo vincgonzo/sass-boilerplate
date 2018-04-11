@@ -201,3 +201,26 @@
     }
   }
 }
+
+/**
+MAKE DUBBLE BORDER CSS ON ELEMENT
+ */
+@mixin dubbleBorder($exteriorThickness, $colorExteriorBorder, $interiorThickness, $colorInteriorBorder)
+{
+  border: $exteriorThickness + px solid $colorExteriorBorder;
+  position: relative;
+
+  &:before {
+    content: '';
+    border: $interiorThickness + px solid $colorInteriorBorder;
+    display: block;
+    background: none;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+    pointer-events: none;
+    z-index: 1;
+  }
+}
