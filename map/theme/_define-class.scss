@@ -36,3 +36,15 @@
 %border-result-row {
   border-right: 1px solid $grey-d8;
 }
+
+%btn-flex-align-fa {
+  @include prefix(display, flex, moz o webkit);
+
+  span {
+    margin: auto auto 10px auto;
+  }
+  i.fa {
+    margin: auto 10px auto auto;
+  }
+
+}
