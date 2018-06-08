@@ -102,6 +102,13 @@
   transform-style: preserve-3d;
 }
 
+/**
+ * args $typo : typo
+ * args $size : font-size
+ * args $line-height : by default (font-size)
+ * args $font-weight : by default (300)
+ * args $color : by default (inherit)
+ */
 @mixin font($typo, $size, $line-height:$size, $weight:300, $color:inherit) {
   font-family: $typo;
   font-size: $size + px;
@@ -149,6 +156,12 @@
   font-size: ($sizeValue + 10) + px;
 }
 
+/**
+ * PREFIXER FOR ANY CSS PROPERTY
+ * args $property : name of your property
+ * args $value : value refered to
+ * array $prefixes : all your prefixes (moz o webkit for instance)
+ */
 @mixin prefix($property, $value, $prefixes: ()) {
   @each $prefix in $prefixes {
     #{'-' + $prefix + '-' + $property}: $value;
@@ -183,8 +196,8 @@
 
 /**
  * Enter $media value define to max or min
- * $value-max at a minimum
- * $value-min is optional to create a between
+ * args $value-max : at a minimum
+ * args $value-min : is optional to create a between
  */
 @mixin mediaQuerries($media, $value-max, $value-min: false) {
   @if $media == max {
@@ -203,7 +216,11 @@
 }
 
 /**
-MAKE DUBBLE BORDER CSS ON ELEMENT
+ * MAKE DUBBLE BORDER CSS ON ELEMENT
+ * args $exteriorThickness : thickness of exterior border
+ * args $colorExteriorBorder : color of exterior border
+ * args $interiorThickness : thickness of interior border
+ * args $colorInteriorBorder : color of interior border
  */
 @mixin dubbleBorder($exteriorThickness, $colorExteriorBorder, $interiorThickness, $colorInteriorBorder)
 {
@@ -222,5 +239,57 @@ MAKE DUBBLE BORDER CSS ON ELEMENT
     bottom: 0px;
     pointer-events: none;
     z-index: 1;
+  }
+}
+
+/**
+ * Generate margin & padding top & bottom automatically
+ */
+@mixin mg-pdGenerator($nbr){
+  @for $i from 0 through $nbr {
+    .mb-#{$i} {
+      margin-bottom: $i + px $imp;
+    }
+
+    .mt-#{$i} {
+      margin-top: $i + px $imp;
+    }
+
+    .pb-#{$i} {
+      padding-bottom: $i + px $imp;
+    }
+
+    .pt-#{$i} {
+      padding-top: $i + px $imp;
+    }
+  }
+}
+
+
+/**
+ * ARROW AFTER ELEMENT CSS
+ * args $color : colour of your arrow down
+ * TODO complete this to manage direction and size of the arrow
+ */
+@mixin arrowAfterElement($color)
+{
+  background-color: $color;
+  font-weight: 600;
+  line-height: 50px;
+  text-align: center;
+  font-size: 20px;
+  position: relative;
+
+  &::after {
+    content: '';
+    position: absolute;
+    left: 42%;
+    top: 100%;
+    width: 0;
+    height: 0;
+    border-left: 20px solid transparent;
+    border-right: 20px solid transparent;
+    border-top: 20px solid $color;
+    clear: both;
   }
 }
